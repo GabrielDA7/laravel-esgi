@@ -15,13 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/plop/{name?}', function ($name = false) {
-  return view('plop', ['name' => $name]);
-});
+//Route::get('/plop/{name?}', function ($name = false) {
+  //return view('plop', ['name' => $name]);
+//});
 
-Route::get('/read', 'WallController@read')->name('wall');
+//Route::get('/read', 'WallController@read')->name('wall');
 
-Route::post('/write', 'WallController@write');
+//Route::post('/write', 'WallController@write');
 
 Auth::routes();
 
