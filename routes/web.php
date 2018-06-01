@@ -31,6 +31,6 @@ Route::get('/group', 'GroupController@index')->name('group');
 
 Route::post('/group/add', 'GroupController@add');
 
-Route::get('/profile', 'UserController@index')->name('profile');
+Route::get('/profile', 'UserController@profile')->name('profile');
 
 Route::get('/vault', 'UserController@vault')->name('vault');
