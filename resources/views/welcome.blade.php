@@ -1,12 +1,12 @@
 @extends('layout')
 
 @section('title')
-Welcome
+{{ config('app.name') }}
 @endsection
 
 @section('content')
   <div class="title m-b-md">
-      Laravel ESGI
+      {{ config('app.name') }}
   </div>
 
   <div class="links">
