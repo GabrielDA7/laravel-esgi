@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 29 May 2018 14:13:35 +0000.
+ * Date: Tue, 29 May 2018 21:10:09 +0000.
  */
 
 namespace App\Models;
@@ -17,15 +17,21 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $url
  * @property string $username
  * @property string $password
+ * @property int $user_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
+ * @property \App\Models\User $user
  * @property \App\Models\Share $share
  *
  * @package App\Models
  */
 class Account extends Eloquent
 {
+	protected $casts = [
+		'user_id' => 'int'
+	];
+
 	protected $hidden = [
 		'password'
 	];
@@ -34,8 +40,14 @@ class Account extends Eloquent
 		'name',
 		'url',
 		'username',
-		'password'
+		'password',
+		'user_id'
 	];
+
+	public function user()
+	{
+		return $this->belongsTo(\App\Models\User::class);
+	}
 
 	public function share()
 	{

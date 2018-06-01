@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 29 May 2018 14:13:35 +0000.
+ * Date: Tue, 29 May 2018 21:10:09 +0000.
  */
 
 namespace App\Models;
@@ -11,10 +11,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Share
- *
+ * 
  * @property int $group_id
  * @property int $account_id
- *
+ * 
  * @property \App\Models\Account $account
  * @property \App\Models\Group $group
  *
