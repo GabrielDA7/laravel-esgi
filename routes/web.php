@@ -25,4 +25,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/group', 'GroupController@index')->name('group');
+
+Route::post('/group/add', 'GroupController@add');
+
+Route::get('/profile', 'UserController@index')->name('profile');
+
+Route::get('/vault', 'UserController@vault')->name('vault');
