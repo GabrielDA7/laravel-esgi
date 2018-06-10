@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Account
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string $url
@@ -20,7 +20,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $user_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * 
+ *
  * @property \App\Models\User $user
  * @property \App\Models\Share $share
  *
@@ -46,7 +46,7 @@ class Account extends Eloquent
 
 	public function user()
 	{
-		return $this->belongsTo(\App\Models\User::class);
+		return $this->belongsTo(\App\User::class);
 	}
 
 	public function share()

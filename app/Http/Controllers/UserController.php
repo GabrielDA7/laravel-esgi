@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -26,13 +27,4 @@ class UserController extends Controller
         return view('profile');
     }
 
-    /**
-     * Show the user vault.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function vault()
-    {
-        return view('vault');
-    }
 }

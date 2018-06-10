@@ -15,22 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/plop/{name?}', function ($name = false) {
-  //return view('plop', ['name' => $name]);
-//});
-
-//Route::get('/read', 'WallController@read')->name('wall');
-
-//Route::post('/write', 'WallController@write');
-
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::post('/account/add', 'AccountController@add')->name('addAccount');
+Route::post('/account/{id}/update', 'AccountController@update')->name('account.update');
+Route::get('/account/{id}/edit', 'AccountController@edit')->name('account.edit');
 
-Route::get('/group', 'GroupController@index')->name('group');
-
+Route::get('/group', 'GroupController@index')->name('groups');
 Route::post('/group/add', 'GroupController@add');
 
 Route::get('/profile', 'UserController@profile')->name('profile');
 
-Route::get('/vault', 'UserController@vault')->name('vault');
+Route::get('/vault', 'VaultController@index')->name('vault');

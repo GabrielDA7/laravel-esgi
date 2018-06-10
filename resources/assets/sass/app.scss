@@ -11,4 +11,80 @@
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  color: blue;
+}
+
+.app-name {
+  font-size: 24px;
+  color: #616161;
+}
+
+.app-name:hover {
+  text-decoration: none;
+  color: #616161;
+}
+
+.nav-link {
+
+}
+
+.nav-link:hover {
+
+}
+
+.wrap-image {
+  width: 70px;
+}
+
+#navbar-gif {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.masthead {
+  text-align: center;
+  color: white;
+  padding: 4em;
+}
+
+.masthead h1 {
+  font-size: 4em;
+  font-weight: bold;
+}
+
+.background-gradient {
+  background-image: url('http://homestead.test/img/cool-background.png');
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover;
+}
+
+.home-img {
+  color: white;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover;
+  height: 540px;
+}
+
+#welcome .card, #vault .card{
+  height: 150px;
+}
+
+.footer {
+  background-color: #616161;
+  color: #fff;
+  padding: 2em;
+}
+
+.account-id {
+  display: none;
+}
+
+#vault .card {
+  margin-top : 20px;
+}
+
+#vault .card:hover{
+  box-shadow: 0 0 0 3px #658525;
+  transition: .5s ease;
 }

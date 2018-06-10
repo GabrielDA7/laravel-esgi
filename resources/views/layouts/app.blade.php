@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
+    <link rel="icon" type="image/gif" href="{{ asset('img/djKhaled.gif') }}"/>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,13 +20,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('link')
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <div class="wrap-image">
+                  <img id="navbar-gif" src="{{ asset('img/djKhaled.gif') }}" alt="gif">
+                </div>
+                <a class="app-name" href="{{ url('/') }}">
+                  {{ config('app.name') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -34,7 +39,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                      @if(Auth::check())
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ route('vault') }}">Vault</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ route('groups') }}">Groups</a>
+                        </li>
+                      @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -67,9 +79,20 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
+
+        <footer class="footer fixed-bottom">
+          <div class="container-fluid">
+            <div class="row">
+              <span>© 2018 ESGI, Inc. Tous droits réservés. Marque déposée.</span>
+            </div>
+          </div>
+        </footer>
+        @yield('modal')
     </div>
+
+    @yield('script')
 </body>
 </html>

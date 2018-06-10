@@ -13,9 +13,6 @@
   </div>
 
   <ul>
-    @foreach ($posts as $post)
-      <li><b>{{ $post->user->name }}</b> {{ $post->content }}</li>
-    @endforeach
   </ul>
 
 @endsection
