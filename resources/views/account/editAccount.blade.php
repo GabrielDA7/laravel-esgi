@@ -19,7 +19,7 @@
       </div>
       <div class="form-group">
         {!! Form::label('labelPassword', 'Password') !!}
-        {!! Form::text('password', null, ['id'=>'input-password','class'=>'form-control']) !!}
+        {!! Form::text('password', \CustomHash::encrypt_decrypt('decrypt', $account->password, $account->user->password), ['id'=>'input-password','class'=>'form-control']) !!}
       </div>
       {!! Form::button('Generate Password', ['id'=>'generate-password', 'class'=>'btn btn-secondary']) !!}
       {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}

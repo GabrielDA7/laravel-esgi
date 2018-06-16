@@ -9,7 +9,7 @@
     </div>
   </header>
 
-  <div id="welcome" class="container">
+  <div id="welcome" class="container py-4">
 
     <div class="row justify-content-center text-center">
       <div class="col-md-8">

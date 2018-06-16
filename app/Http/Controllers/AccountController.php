@@ -6,6 +6,7 @@ use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Group;
 
 class AccountController extends Controller
 {
@@ -68,15 +69,17 @@ class AccountController extends Controller
    */
   public function update(Request $request, $account_id)
   {
+    // Tester si le nom de l'account n'est pas déjà pris sauf si equivalent à l'entité
     $validator = Validator::make($request->all(), [
-      'name' => 'required|unique:accounts|max:255',
+      'name' => 'required|max:255',
       'username' => 'required',
       'password' => 'required'
     ]);
 
     if($validator->fails()) {
+      var_dump($validator);die;
       return redirect()
-                  ->route('account.edit', ['id' => $account->id])
+                  ->route('account.edit', ['id' => $account_id])
                   ->withErrors($validator)
                   ->withInput();
     }
@@ -86,7 +89,7 @@ class AccountController extends Controller
         $account->name = $request->name;
         $account->url = $request->url;
         $account->username = $request->username;
-        $account->password = \CustomHash::encrypt_decrypt('encrypt', $request->password, \Auth::user()->password);
+        $account->password = \CustomHash::encrypt_decrypt('encrypt', $request->password, $account->user->password);
         $account->save();
         return redirect()->route('vault');
     } else {
@@ -99,8 +102,26 @@ class AccountController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function delete()
+  public function delete(Request $request, $account_id)
   {
+    $account = Account::find($account_id);
+    if($this->authorize('update', $account)) {
+      $account->delete();
+      return redirect()->route('vault');
+    }
+  }
 
+  /**
+   * Share accounts.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function share(Request $request)
+  {
+    $group = Group::find($request->group_id);
+    foreach ($request->userAccounts as $userAccount_id=>$userAccount) {
+      $group->accounts()->attach($userAccount_id);
+    }
+    return redirect()->route('group.show', ['id'=>$group->id]);
   }
 }

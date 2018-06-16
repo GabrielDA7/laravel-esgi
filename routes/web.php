@@ -17,13 +17,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::post('/account/add', 'AccountController@add')->name('addAccount');
-Route::post('/account/{id}/update', 'AccountController@update')->name('account.update');
+Route::get('/vault', 'VaultController@index')->name('vault');
 Route::get('/account/{id}/edit', 'AccountController@edit')->name('account.edit');
+Route::post('/account/add', 'AccountController@add')->name('account.add');
+Route::post('/account/{id}/update', 'AccountController@update')->name('account.update');
+Route::post('/account/{id}/delete', 'AccountController@delete')->name('account.delete');
+Route::post('/account/share', 'AccountController@share')->name('account.share');
 
 Route::get('/group', 'GroupController@index')->name('groups');
-Route::post('/group/add', 'GroupController@add');
+Route::get('/group/{id}/show', 'GroupController@show')->name('group.show');
+Route::post('/group/add', 'GroupController@add')->name('group.add');
+Route::post('/group/{id}/update', 'GroupController@update')->name('group.update');
+Route::post('/group/{id}/delete', 'GroupController@delete')->name('group.delete');
+Route::post('/group/share', 'GroupController@share')->name('group.share');
 
+Route::post('/user/search', 'UserController@search')->name('user.search');
 Route::get('/profile', 'UserController@profile')->name('profile');
-
-Route::get('/vault', 'VaultController@index')->name('vault');

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 29 May 2018 21:10:09 +0000.
+ * Date: Sun, 10 Jun 2018 09:59:17 +0000.
  */
 
 namespace App\Models;
@@ -10,7 +10,7 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Share
+ * Class GroupAccount
  * 
  * @property int $group_id
  * @property int $account_id
@@ -20,8 +20,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class Share extends Eloquent
+class GroupAccount extends Eloquent
 {
+	protected $table = 'group_account';
 	public $incrementing = false;
 	public $timestamps = false;
 

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 29 May 2018 21:10:09 +0000.
+ * Date: Sun, 10 Jun 2018 09:59:17 +0000.
  */
 
 namespace App\Models;
@@ -11,10 +11,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class GroupUser
- * 
+ *
  * @property int $group_id
  * @property int $user_id
- * 
+ *
  * @property \App\Models\Group $group
  * @property \App\Models\User $user
  *
@@ -43,6 +43,6 @@ class GroupUser extends Eloquent
 
 	public function user()
 	{
-		return $this->belongsTo(\App\Models\User::class);
+		return $this->belongsTo(\App\User::class);
 	}
 }

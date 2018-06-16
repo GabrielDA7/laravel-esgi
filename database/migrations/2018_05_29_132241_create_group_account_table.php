@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSharesTable extends Migration
+class CreateGroupAccountTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSharesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shares', function (Blueprint $table) {
+        Schema::create('group_account', function (Blueprint $table) {
             $table->integer('group_id')->unsigned();
             $table->foreign('group_id')->references('id')->on('groups');
 
@@ -31,6 +31,6 @@ class CreateSharesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shares');
+        Schema::dropIfExists('group_account');
     }
 }

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 29 May 2018 21:10:09 +0000.
+ * Date: Sun, 10 Jun 2018 09:59:17 +0000.
  */
 
 namespace App\Models;
@@ -22,7 +22,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $updated_at
  *
  * @property \App\Models\User $user
- * @property \App\Models\Share $share
+ * @property \Illuminate\Database\Eloquent\Collection $groups
  *
  * @package App\Models
  */
@@ -49,8 +49,8 @@ class Account extends Eloquent
 		return $this->belongsTo(\App\User::class);
 	}
 
-	public function share()
+	public function groups()
 	{
-		return $this->hasOne(\App\Models\Share::class);
+		return $this->belongsToMany(\App\Models\Group::class, 'group_account');
 	}
 }

@@ -27,4 +27,14 @@ class UserController extends Controller
         return view('profile');
     }
 
+    /**
+     * Get user by keyword
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search($keyword="DS")
+    {
+        return response()->json(['result'=>$keyword]);
+    }
+
 }

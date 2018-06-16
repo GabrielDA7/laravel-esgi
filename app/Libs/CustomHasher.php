@@ -12,7 +12,6 @@ class CustomHasher {
      * @return string
      */
     public function encrypt_decrypt($action, $string, $salt) {
-
       $encrypt_method = "AES-256-CBC";
 
       $secret_key = md5($salt, true);

@@ -17,4 +17,5 @@ mix.autoload({
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
-   .js('resources/assets/js/vault.js', 'public/js');
+   .js('resources/assets/js/vault.js', 'public/js')
+   .js('resources/assets/js/groups.js', 'public/js');
