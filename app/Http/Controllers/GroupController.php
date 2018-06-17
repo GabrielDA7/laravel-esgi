@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Group;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -86,6 +87,17 @@ class GroupController extends Controller
      */
     public function share(Request $request)
     {
-      var_dump($request->groups);die;
+      if(!empty($request->user_added)) {
+        $user_ids = explode(";", $request->user_added);
+        foreach ($user_ids as $user_id) {
+          if(!empty($user_id)) {
+            $user = User::find($user_id);
+            foreach($request->groups as $group_id => $group_name) {
+              $user->groups()->attach($group_id);
+            }
+          }
+        }
+      }
+      return redirect()->route('groups');
     }
 }

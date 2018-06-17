@@ -107,35 +107,22 @@
           </button>
         </div>
         <div class="modal-body">
-          {!! Form::open(['url'=>'account/share']) !!}
+          {!! Form::open(['url'=>'group/share']) !!}
           @if($groups != null)
-            <div class="container py-4">
+            <div class="container">
               <div class="row">
-                {!! Form::text('search',null, ['class'=>'form-control', 'id'=>'search_user', 'placeholder'=>'Search User...']) !!}
+                <div id="user_display" class="hidden-content"></div>
+                {!! Form::hidden('user_added', "", ['id'=>'user_added']) !!}
+              </div>
+              <div class="row">
+                {!! Form::text('search',null, ['class'=>'form-control', 'id'=>'search_user', 'placeholder'=>'Search User...', 'autocomplete'=>'off', 'disabled'=>true]) !!}
               </div>
               <div class="row">
                 <div id="search_result" class="hidden-content"></div>
-                <div class="cssload-loader-inner hidden-content">
-                  <div class="cssload-cssload-loader-line-wrap-wrap">
-                    <div class="cssload-loader-line-wrap"></div>
-                  </div>
-                  <div class="cssload-cssload-loader-line-wrap-wrap">
-                    <div class="cssload-loader-line-wrap"></div>
-                  </div>
-                  <div class="cssload-cssload-loader-line-wrap-wrap">
-                    <div class="cssload-loader-line-wrap"></div>
-                  </div>
-                  <div class="cssload-cssload-loader-line-wrap-wrap">
-                    <div class="cssload-loader-line-wrap"></div>
-                  </div>
-                  <div class="cssload-cssload-loader-line-wrap-wrap">
-                    <div class="cssload-loader-line-wrap"></div>
-                  </div>
-                </div>
               </div>
-              <div class="row">
+              <div class="row padding-top">
                 @foreach ($groups as $group)
-                  {!! Form::checkbox('groups[' . $group->id . ']', trim(strtolower($group->name))) !!}
+                  {!! Form::checkbox('groups[' . $group->id . ']', trim(strtolower($group->name)),false, ['id'=>$group->id]) !!}
                   {!! Form::label(trim(strtolower($group->name)), $group->name) !!}
                 @endforeach
               </div>

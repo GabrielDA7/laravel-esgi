@@ -22,6 +22,5 @@ commande à lancer pour développer :
   <li>Passer un coup de peinture</li>
   <li>Check tous les formulaires</li>
   <li>Faire un systeme de repositorie pour alléger le code dans les controller : https://medium.com/@connorleech/use-the-repository-design-pattern-in-a-laravel-application-13f0b46a3dce</li>
-  <li>Fixer le partage de group aux utilisateurs</li>
   <li>Ajouter les policies pour les groupes</li>
 </ul>
