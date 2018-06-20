@@ -69,7 +69,6 @@ class AccountController extends Controller
    */
   public function update(Request $request, $account_id)
   {
-    // Tester si le nom de l'account n'est pas déjà pris sauf si equivalent à l'entité
     $validator = Validator::make($request->all(), [
       'name' => 'required|max:255',
       'username' => 'required',
@@ -85,16 +84,13 @@ class AccountController extends Controller
     }
 
     $account = Account::find($account_id);
-    if($this->authorize('update', $account)) {
-        $account->name = $request->name;
-        $account->url = $request->url;
-        $account->username = $request->username;
-        $account->password = \CustomHash::encrypt_decrypt('encrypt', $request->password, $account->user->password);
-        $account->save();
-        return redirect()->route('vault');
-    } else {
-      echo 'non autorisé';
-    }
+    $account->name = $request->name;
+    $account->url = $request->url;
+    $account->username = $request->username;
+    $account->password = \CustomHash::encrypt_decrypt('encrypt', $request->password, $account->user->password);
+    $account->save();
+
+    return redirect()->route('vault');
   }
 
   /**
@@ -105,10 +101,8 @@ class AccountController extends Controller
   public function delete(Request $request, $account_id)
   {
     $account = Account::find($account_id);
-    if($this->authorize('update', $account)) {
-      $account->delete();
-      return redirect()->route('vault');
-    }
+    $account->delete();
+    return redirect()->route('vault');
   }
 
   /**

@@ -24,14 +24,6 @@
   color: #616161;
 }
 
-.nav-link {
-
-}
-
-.nav-link:hover {
-
-}
-
 .wrap-image {
   width: 70px;
 }
@@ -93,6 +85,7 @@
   padding: 0 5px 0 0;
   background-color: white;
   border: none;
+  height: 20px;
 }
 
 #vault .card-body {
@@ -297,6 +290,7 @@
   padding-left: 5px;
   padding-right: 5px;
   font-weight: bold;
+  float: left;
 }
 
 .user_added span {

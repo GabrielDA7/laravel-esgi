@@ -10520,7 +10520,7 @@ module.exports = __webpack_require__(60);
     });
   });
 
-  $("#search_result").on("click", ".list-group-item-clicked", function () {
+  $("#search_result").on("click", ".list-group-item", function () {
     var user_id = $(this).find("#id_user").html();
     var username = $(this).find("#username").html();
     $("#user_display").removeClass('hidden-content');
@@ -10545,6 +10545,14 @@ module.exports = __webpack_require__(60);
     $("#user_added").attr("value", function () {
       return $(this).attr("value").replace(id_user, "");
     });
+  });
+
+  $("#groups .list-group-item-clicked").on("click", "#delete-group", function () {
+    var group_id = $(this).parent().parent().find(".hidden-content").text();
+    var action = "/" + group_id + "/delete";
+    var form = $("#mdl-delete-group .modal-body form");
+    var action = form.attr('action') + action;
+    form.attr('action', action);
   });
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))

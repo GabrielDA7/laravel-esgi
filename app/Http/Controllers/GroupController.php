@@ -75,8 +75,15 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function delete()
+    public function delete(Request $request)
     {
+      $group = Group::find($request->id);
+      if($group->author == \Auth::id()){
+        $group->delete();
+      } else {
+        \Auth::user()->groups()->detach($group->id);
+      }
+      return redirect()->route('groups');
 
     }
 

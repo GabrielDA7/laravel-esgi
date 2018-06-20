@@ -7,7 +7,12 @@
         <h1>{{$title}}</h1>
       </div>
       <div class="col-md-4 text-right">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#mdl-{{$action}}-account">{{ ucfirst($action) }} account</a>
+        <div class="btn-group">
+          <button class="btn btn-primary" data-toggle="modal" data-target="#mdl-{{$action}}-account">{{ ucfirst($action) }} account</a>
+          @can('manage', $group)
+            <button class="btn btn-secondary" data-toggle="modal" data-target="#mdl-share-group">Manage the group</button>
+          @endcan
+        </div>
       </div>
     </div>
 
@@ -25,28 +30,32 @@
       </div>
     @endif
 
-    <div class="row justify-content-start">
       @if(!$accounts->isEmpty())
-        @foreach ($accounts as $account)
-          <div class="col-md-3">
-              <div class="card">
-                <div class="card-header">
-                  <button type="button" class="close" data-toggle="modal" data-target="#mdl-delete-account">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">{{ $account->name }}</h5>
-                  <a class="card-text" href="{{ $account->url }}">{{  $account->url}}</a>
-                  <span class="hidden-content">{{ $account->id }}</span>
+        <div class="row justify-content-start">
+          @foreach ($accounts as $account)
+            <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    @can('delete', $account)
+                      <button type="button" class="close" data-toggle="modal" data-target="#mdl-delete-account">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    @endcan
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ $account->name }}</h5>
+                    <a class="card-text" href="{{ $account->url }}">{{  $account->url}}</a>
+                    <span class="hidden-content">{{ $account->id }}</span>
+                  </div>
                 </div>
               </div>
-          </div>
-        @endforeach
+          @endforeach
+        </div>
       @else
-        <span>No accounts yet !</span>
+        <div class="row justify-content-center">
+          <span>No accounts yet !</span>
+        </div>
       @endif
-    </div>
   </div>
 @endsection
 
@@ -121,22 +130,24 @@
           </button>
         </div>
         <div class="modal-body">
-          {!! Form::open(['url'=>'account/share']) !!}
-          @if($userAccounts != null)
-            <div class="container py-4">
-              <div class="row">
-                @foreach ($userAccounts as $userAccount)
-                  {!! Form::checkbox('userAccounts[' . $userAccount->id . ']', trim(strtolower($userAccount->name))) !!}
-                  {!! Form::label(trim(strtolower($userAccount->name)), $userAccount->name) !!}
-                @endforeach
-                {!! Form::hidden('group_id', $group->id) !!}
+          <div class="container">
+            {!! Form::open(['url'=>'account/share']) !!}
+            @if(!$userAccounts->isEmpty())
+                <div class="row">
+                  @foreach ($userAccounts as $userAccount)
+                    {!! Form::checkbox('userAccounts[' . $userAccount->id . ']', trim(strtolower($userAccount->name))) !!}
+                    {!! Form::label(trim(strtolower($userAccount->name)), $userAccount->name) !!}
+                  @endforeach
+                  {!! Form::hidden('group_id', $group->id) !!}
+                </div>
+            @else
+              <div class="row justify-content-center">
+                <span>No accounts to share !</span>
               </div>
-            </div>
-          @else
-            <span>No accounts to share !</span>
-          @endif
-          {!! Form::submit('Share', ['class'=>'btn btn-primary form-control']) !!}
-          {!! Form::close() !!}
+            @endif
+            {!! Form::submit('Share', ['class'=>'btn btn-primary form-control']) !!}
+            {!! Form::close() !!}
+          </div>
         </div>
       </div>
     </div>

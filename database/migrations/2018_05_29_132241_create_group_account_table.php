@@ -18,7 +18,7 @@ class CreateGroupAccountTable extends Migration
             $table->foreign('group_id')->references('id')->on('groups');
 
             $table->integer('account_id')->unsigned();
-            $table->foreign('account_id')->references('id')->on('accounts');
+            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
 
             $table->index(['group_id','account_id'])->unique();
         });

@@ -19,7 +19,7 @@ class AccountPolicy
      */
     public function view(User $user, Account $account)
     {
-        return $user->id === $account->user_id;
+        return $user->id == $account->user_id;
     }
 
     /**
@@ -30,7 +30,7 @@ class AccountPolicy
      */
     public function create(User $user)
     {
-        return $user->id === $account->user_id;
+        return $user->id == $account->user_id;
     }
 
     /**
@@ -42,7 +42,7 @@ class AccountPolicy
      */
     public function update(User $user, Account $account)
     {
-      return $user->id === $account->user_id;
+      return $user->id == $account->user_id;
     }
 
     /**
@@ -54,7 +54,6 @@ class AccountPolicy
      */
     public function delete(User $user, Account $account)
     {
-      die;
-        return $user->id === $account->user_id;
+        return $user->id == $account->user_id;
     }
 }

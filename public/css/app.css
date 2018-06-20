@@ -10492,6 +10492,7 @@ a.text-dark:focus {
   padding: 0 5px 0 0;
   background-color: white;
   border: none;
+  height: 20px;
 }
 
 #vault .card-body {
@@ -10685,6 +10686,7 @@ a.text-dark:focus {
   padding-left: 5px;
   padding-right: 5px;
   font-weight: bold;
+  float: left;
 }
 
 .user_added span {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Account;
+use App\Models\Group;
 
 class VaultController extends Controller
 {
@@ -26,7 +28,7 @@ class VaultController extends Controller
   public function index()
   {
       $accounts = User::find(\Auth::id())->accounts()->get();
-      return view('vault.vault', ['accounts'=>$accounts,"userAccounts"=>null, 'group'=>null,"action"=>"add", "title"=>"My keys"]);
+      return view('vault.vault', ['accounts'=>$accounts,"userAccounts"=>collect(new Account), 'group'=>collect(new Group),"action"=>"add", "title"=>"My keys"]);
   }
 
 }

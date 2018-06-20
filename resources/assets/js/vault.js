@@ -20,6 +20,6 @@ $(function() {
     var form = $("#mdl-delete-account .modal-body form");
     var action = form.attr('action') + action;
     form.attr('action', action);
-  })
+  });
 
 });

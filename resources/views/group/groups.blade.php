@@ -9,8 +9,8 @@
       </div>
       <div class="col-md-4 text-right">
         <div class="btn-group">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#mdl-new-group">Add group</a>
-          <button class="btn btn-secondary" data-toggle="modal" data-target="#mdl-share-group">Share group</a>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#mdl-new-group">Add group</button>
+          <button class="btn btn-secondary" data-toggle="modal" data-target="#mdl-share-group">Share group</button>
         </div>
       </div>
     </div>
@@ -31,25 +31,27 @@
 
     <div class="row justify-content-center py-4">
       <div class="col-md-8">
-        <div class="list-group">
           @if(!$groups->isEmpty())
-            @foreach ($groups as $group)
-              <div class="row list-group-item-clicked">
-                <div class="col-md-11 list-group-item-show">
-                  {{ $group->name }}
-                  <span class="hidden-content">{{ $group->id }}</span>
+            <div class="list-group">
+              @foreach ($groups as $group)
+                <div class="row list-group-item-clicked">
+                  <div class="col-md-11 list-group-item-show">
+                    {{ $group->name }}
+                    <span class="hidden-content">{{ $group->id }}</span>
+                  </div>
+                  <div class="col-md-1">
+                    <button id="delete-group" type="button" class="close" data-toggle="modal" data-target="#mdl-delete-group">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
                 </div>
-                <div class="col-md-1">
-                  <button type="button" class="close" data-toggle="modal" data-target="#mdl-delete-group">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              </div>
-            @endforeach
+              @endforeach
+            </div>
           @else
-            <span>No groups yet !</span>
+            <div class="row justify-content-center">
+              <span>No groups yet !</span>
+            </div>
           @endif
-        </div>
       </div>
     </div>
   </div>

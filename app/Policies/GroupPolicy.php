@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\User;
-use App\Group;
+use App\Models\Group;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class GroupPolicy
@@ -19,7 +19,7 @@ class GroupPolicy
      */
     public function view(User $user, Group $group)
     {
-        //
+
     }
 
     /**
@@ -55,5 +55,17 @@ class GroupPolicy
     public function delete(User $user, Group $group)
     {
         //
+    }
+
+    /**
+     * Determine whether the user can manage the group.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Group  $group
+     * @return mixed
+     */
+    public function manage(User $user, Group $group)
+    {
+        return $user->id == $group->author;
     }
 }

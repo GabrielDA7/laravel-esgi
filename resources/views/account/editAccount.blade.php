@@ -21,8 +21,10 @@
         {!! Form::label('labelPassword', 'Password') !!}
         {!! Form::text('password', \CustomHash::encrypt_decrypt('decrypt', $account->password, $account->user->password), ['id'=>'input-password','class'=>'form-control']) !!}
       </div>
-      {!! Form::button('Generate Password', ['id'=>'generate-password', 'class'=>'btn btn-secondary']) !!}
-      {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}
+      @can('update', $account)
+        {!! Form::button('Generate Password', ['id'=>'generate-password', 'class'=>'btn btn-secondary']) !!}
+        {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}
+      @endcan
     {!! Form::close() !!}
   </div>
 
