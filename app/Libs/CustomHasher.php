@@ -20,7 +20,7 @@ class CustomHasher {
       // hash
       $key = hash('sha256', $secret_key);
 
-      // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+      // iv - encrypt method AES-256-CBC expects 16 bytes
       $iv = substr(hash('sha256', $secret_iv), 0, 16);
 
       if ( $action == 'encrypt' ) {

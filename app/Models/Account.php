@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 10 Jun 2018 09:59:17 +0000.
+ * Date: Wed, 20 Jun 2018 12:47:00 +0000.
  */
 
 namespace App\Models;
@@ -51,6 +51,6 @@ class Account extends Eloquent
 
 	public function groups()
 	{
-		return $this->belongsToMany(\App\Models\Group::class, 'group_account');
+		return $this->belongsToMany(\App\Group::class, 'group_account');
 	}
 }

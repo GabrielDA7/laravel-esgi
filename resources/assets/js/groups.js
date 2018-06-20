@@ -1,6 +1,6 @@
 $(function() {
 
-  $("#groups .list-group-item").on("click", function() {
+  $("#groups .list-group-item-show").on("click", function() {
     var group_id = $(this).find(".hidden-content").text();
     window.location.href = "/group/" + group_id + "/show";
   });
@@ -72,7 +72,7 @@ $(function() {
     });
   });
 
-  $("#search_result").on("click", ".list-group-item",function() {
+  $("#search_result").on("click", ".list-group-item-clicked",function() {
     var user_id = $(this).find("#id_user").html();
     var username = $(this).find("#username").html();
     $("#user_display").removeClass('hidden-content');

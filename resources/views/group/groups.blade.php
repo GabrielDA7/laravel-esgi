@@ -34,12 +34,16 @@
         <div class="list-group">
           @if(!$groups->isEmpty())
             @foreach ($groups as $group)
-              <div class="list-group-item list-group-item-action">
-                {{ $group->name }}
-                <button type="button" class="close" data-toggle="modal" data-target="#mdl-delete-group">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <span class="hidden-content">{{ $group->id }}</span>
+              <div class="row list-group-item-clicked">
+                <div class="col-md-11 list-group-item-show">
+                  {{ $group->name }}
+                  <span class="hidden-content">{{ $group->id }}</span>
+                </div>
+                <div class="col-md-1">
+                  <button type="button" class="close" data-toggle="modal" data-target="#mdl-delete-group">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
               </div>
             @endforeach
           @else
@@ -68,7 +72,7 @@
               {!! Form::label('labelName', 'Name') !!}
               {!! Form::text('name',null , ['class'=>'form-control']) !!}
             </div>
-            {!! Form::submit('Add', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Add', ['class'=>'btn btn-primary form-control']) !!}
           {!! Form::close() !!}
         </div>
       </div>
@@ -108,8 +112,8 @@
         </div>
         <div class="modal-body">
           {!! Form::open(['url'=>'group/share']) !!}
-          @if($groups != null)
-            <div class="container">
+          <div class="container">
+          @if(!$groups->isEmpty())
               <div class="row">
                 <div id="user_display" class="hidden-content"></div>
                 {!! Form::hidden('user_added', "", ['id'=>'user_added']) !!}
@@ -126,12 +130,15 @@
                   {!! Form::label(trim(strtolower($group->name)), $group->name) !!}
                 @endforeach
               </div>
-            </div>
+              <div class="row">
+                {!! Form::submit('Share', ['class'=>'btn btn-primary form-control']) !!}
+              </div>
           @else
-            <span>No groups to share !</span>
+            <div class="row justify-content-center">
+              <span>No groups to share !</span>
+            </div>
           @endif
-          {!! Form::button('Cancel', ['class'=>'btn btn-secondary', 'data-dismiss'=>'modal']) !!}
-          {!! Form::submit('Share', ['class'=>'btn btn-primary']) !!}
+          </div>
           {!! Form::close() !!}
         </div>
       </div>

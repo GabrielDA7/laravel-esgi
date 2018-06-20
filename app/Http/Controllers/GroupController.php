@@ -52,7 +52,7 @@ class GroupController extends Controller
         }
 
         $user = User::find(\Auth::id());
-        $group = new Group(['name'=>$request->name]);
+        $group = new Group(['name'=>$request->name, 'author'=>\Auth::id()]);
         $user->groups()->save($group);
         return redirect()->route('groups');
     }
@@ -67,7 +67,7 @@ class GroupController extends Controller
         $group = Group::find($group_id);
         $accounts = $group->accounts;
         $userAccounts = User::find(\Auth::id())->accounts;
-        return view('vault.vault', ['accounts'=>$accounts, 'userAccounts'=>$userAccounts, 'group'=>$group, 'action'=>'share','title'=>$group->name.'\' keys']);
+        return view('vault.vault', ['accounts'=>$accounts, 'userAccounts'=>$userAccounts, 'group'=>$group, 'action'=>'share','title'=>$group->name.'\'s keys']);
     }
 
     /**
@@ -93,7 +93,10 @@ class GroupController extends Controller
           if(!empty($user_id)) {
             $user = User::find($user_id);
             foreach($request->groups as $group_id => $group_name) {
-              $user->groups()->attach($group_id);
+              $group = Group::find($group_id);
+              if(!$group->users->contains($user_id)) {
+                $user->groups()->attach($group_id);
+              }
             }
           }
         }

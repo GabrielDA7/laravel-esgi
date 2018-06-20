@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/vault.js": "/js/vault.js",
-    "/js/groups.js": "/js/groups.js"
+    "/js/groups.js": "/js/groups.js",
+    "/js/404.js": "/js/404.js"
 }

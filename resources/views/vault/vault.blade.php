@@ -80,8 +80,10 @@
               {!! Form::label('labelPassword', 'Password') !!}
               {!! Form::password('password' , ['id'=>'input-password','class'=>'form-control']) !!}
             </div>
-            {!! Form::button('Generate Password', ['id'=>'generate-password', 'class'=>'btn btn-secondary']) !!}
-            {!! Form::submit('Add', ['class'=>'btn btn-primary']) !!}
+            <div class="form-group">
+              {!! Form::button('Generate Password', ['id'=>'generate-password', 'class'=>'btn btn-secondary']) !!}
+              {!! Form::submit('Add', ['class'=>'btn btn-primary']) !!}
+            </div>
           {!! Form::close() !!}
         </div>
       </div>
@@ -101,8 +103,7 @@
         <div class="modal-body">
           <p>Are you sure you want to delete this account ?</p>
           {!! Form::open(['url'=>'account']) !!}
-          {!! Form::button('Cancel', ['id'=>'generate-password', 'class'=>'btn btn-secondary', 'data-dismiss'=>'modal']) !!}
-          {!! Form::submit('Delete', ['class'=>'btn btn-primary']) !!}
+          {!! Form::submit('Delete', ['class'=>'btn btn-primary form-control']) !!}
           {!! Form::close() !!}
         </div>
       </div>
@@ -134,8 +135,7 @@
           @else
             <span>No accounts to share !</span>
           @endif
-          {!! Form::button('Cancel', ['class'=>'btn btn-secondary', 'data-dismiss'=>'modal']) !!}
-          {!! Form::submit('Share', ['class'=>'btn btn-primary']) !!}
+          {!! Form::submit('Share', ['class'=>'btn btn-primary form-control']) !!}
           {!! Form::close() !!}
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 10 Jun 2018 09:59:17 +0000.
+ * Date: Wed, 20 Jun 2018 12:47:00 +0000.
  */
 
 namespace App\Models;
@@ -16,7 +16,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $user_id
  *
  * @property \App\Models\Group $group
- * @property \App\Models\User $user
+ * @property \App\User $user
  *
  * @package App\Models
  */

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 10 Jun 2018 09:59:17 +0000.
+ * Date: Wed, 20 Jun 2018 12:47:00 +0000.
  */
 
 namespace App\Models;
@@ -14,6 +14,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @property int $id
  * @property string $name
+ * @property string $author
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *
@@ -25,7 +26,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Group extends Eloquent
 {
 	protected $fillable = [
-		'name'
+		'name',
+		'author'
 	];
 
 	public function accounts()

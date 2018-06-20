@@ -10691,3 +10691,16 @@ a.text-dark:focus {
   color: white;
 }
 
+#this-is-you {
+  width: 250px;
+}
+
+.list-group-item-clicked {
+  background-color: white;
+  border: solid 1px grey;
+  border-radius: 5px;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+
