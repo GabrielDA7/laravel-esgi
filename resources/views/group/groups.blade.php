@@ -2,7 +2,28 @@
 
 @section('content')
   <div id="groups" class="container py-4">
-
+    @if ($errors->any())
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              @foreach ($errors->all() as $error)
+                <div class="row">
+                  {{ $error }}
+                </div>
+              @endforeach
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+    @endif
+    @if (Session::has('succes'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <div class="row">
+                {{ Session::get('succes') }}
+              </div>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+    @endif
     <div class="row">
       <div class="offset-md-4 col-md-4 text-center">
         <h1>My groups</h1>
@@ -15,28 +36,15 @@
       </div>
     </div>
 
-    @if ($errors->any())
-      <div class="row justify-content-center text-center">
-        <div class="col-md-8">
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-        </div>
-      </div>
-    @endif
-
     <div class="row justify-content-center py-4">
       <div class="col-md-8">
-          @if(!$groups->isEmpty())
+          @isset($groups)
             <div class="list-group">
               @foreach ($groups as $group)
                 <div class="row list-group-item-clicked">
                   <div class="col-md-11 list-group-item-show">
                     {{ $group->name }}
+                    <span class="author-group">by {{$group->users()->where('id', '=', $group->author)->first()->name}}</span>
                     <span class="hidden-content">{{ $group->id }}</span>
                   </div>
                   <div class="col-md-1">
@@ -51,7 +59,7 @@
             <div class="row justify-content-center">
               <span>No groups yet !</span>
             </div>
-          @endif
+          @endisset
       </div>
     </div>
   </div>
@@ -72,7 +80,7 @@
           {!! Form::open(['url'=>'group/add']) !!}
             <div class="form-group">
               {!! Form::label('labelName', 'Name') !!}
-              {!! Form::text('name',null , ['class'=>'form-control']) !!}
+              {!! Form::text('name',null , ['class'=>'form-control', 'autocomplete'=>'off']) !!}
             </div>
             {!! Form::submit('Add', ['class'=>'btn btn-primary form-control']) !!}
           {!! Form::close() !!}
@@ -115,7 +123,7 @@
         <div class="modal-body">
           {!! Form::open(['url'=>'group/share']) !!}
           <div class="container">
-          @if(!$groups->isEmpty())
+          @isset($groups)
               <div class="row">
                 <div id="user_display" class="hidden-content"></div>
                 {!! Form::hidden('user_added', "", ['id'=>'user_added']) !!}
@@ -139,7 +147,7 @@
             <div class="row justify-content-center">
               <span>No groups to share !</span>
             </div>
-          @endif
+          @endisset
           </div>
           {!! Form::close() !!}
         </div>

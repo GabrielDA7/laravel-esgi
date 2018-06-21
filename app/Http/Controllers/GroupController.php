@@ -9,6 +9,7 @@ use App\Models\Account;
 use App\Models\Group;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller
 {
@@ -30,6 +31,9 @@ class GroupController extends Controller
     public function index()
     {
         $groups = User::find(\Auth::id())->groups()->get();
+        if($groups->isEmpty()) {
+          $groups = null;
+        }
         return view('group.groups', ['groups'=>$groups]);
     }
 
@@ -54,6 +58,9 @@ class GroupController extends Controller
         $user = User::find(\Auth::id());
         $group = new Group(['name'=>$request->name, 'author'=>\Auth::id()]);
         $user->groups()->save($group);
+
+        Session::flash('succes', 'Group successfully added');
+
         return redirect()->route('groups');
     }
 
@@ -66,8 +73,15 @@ class GroupController extends Controller
     {
         $group = Group::find($group_id);
         $accounts = $group->accounts;
+        $groupMembers = $group->users()->where('id', '!=', \Auth::id())->get();
+        if ($groupMembers->isEmpty()) {
+          $groupMembers = null;
+        }
         $userAccounts = User::find(\Auth::id())->accounts;
-        return view('vault.vault', ['accounts'=>$accounts, 'userAccounts'=>$userAccounts, 'group'=>$group, 'action'=>'share','title'=>$group->name.'\'s keys']);
+        if ($userAccounts->isEmpty()){
+          $userAccounts = null;
+        }
+        return view('vault.vault', ['accounts'=>$accounts, 'userAccounts'=>$userAccounts, 'groupMembers'=>$groupMembers, 'group'=>$group,'title'=>$group->name.'\'s keys']);
     }
 
     /**
@@ -81,8 +95,13 @@ class GroupController extends Controller
       if($group->author == \Auth::id()){
         $group->delete();
       } else {
-        \Auth::user()->groups()->detach($group->id);
+        $group->users()->toggle([\Auth::id()]);
+        $list_accounts_ids = $group->accounts()->where('user_id', '=' ,\Auth::id())->pluck('id')->toArray();
+        $group->accounts()->detach($list_accounts_ids);
       }
+
+      Session::flash('succes', 'Group successfully deleted');
+
       return redirect()->route('groups');
 
     }
@@ -108,6 +127,29 @@ class GroupController extends Controller
           }
         }
       }
+
+      Session::flash('succes', 'Group successfully shared');
+
       return redirect()->route('groups');
+    }
+
+    /**
+     * Manage the group members.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manage(Request $request)
+    {
+      $group = Group::find($request->group_id);
+      if(isset($group)) {
+        foreach ($request->groupMembers as $member_id => $member_name) {
+          $group->users()->detach($member_id);
+          $list_accounts_ids = $group->accounts()->where('user_id', '=' ,$member_id)->pluck('id')->toArray();
+          $group->accounts()->detach($list_accounts_ids);
+        }
+        Session::flash('succes', 'User(s) successfully excluded');
+        return redirect()->route('group.show', ['group_id'=>$group->id]);
+      }
+      return redirect()->route('group');
     }
 }

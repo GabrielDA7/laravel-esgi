@@ -28,7 +28,10 @@ class VaultController extends Controller
   public function index()
   {
       $accounts = User::find(\Auth::id())->accounts()->get();
-      return view('vault.vault', ['accounts'=>$accounts,"userAccounts"=>collect(new Account), 'group'=>collect(new Group),"action"=>"add", "title"=>"My keys"]);
+      if($accounts->isEmpty()) {
+        $accounts = null;
+      }
+      return view('vault.vault', ['accounts'=>$accounts, "title"=>"My keys"]);
   }
 
 }

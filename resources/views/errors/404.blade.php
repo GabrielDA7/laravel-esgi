@@ -7,20 +7,20 @@ Error 404
 @section('content')
   <div class="container py-4">
     <div class="row justify-content-center">
-      <h1>404 – Page not found</h1>
+      <h1 class="error404">404 – Page not found</h1>
     </div>
     <div class="row">
       <div class="col-md-8">
         <div class="row justify-content-center">
-          <h2>⬐ This is everyone else ⬎</h2>
+          <h2>⬐ People are there ⬎</h2>
         </div>
-        <div class="row justift-content-center">
-
+        <div class="row justify-content-center">
+          <img id="this-is-you" src="{{asset('img/monde.png')}}" style="width:80%;" alt="your position">
         </div>
       </div>
       <div class="col-md-4">
         <div class="row py-4 justify-content-center">
-          <img id="this-is-you" src="https://path.blue/wp-content/uploads/2017/09/404-offmap-short.png" style="width:250px;" alt="your position">
+          <img id="this-is-you" src="{{asset('img/thisIsYou.png')}}" style="width:250px;" alt="your position">
         </div>
       </div>
     </div>

@@ -30,6 +30,7 @@ Route::post('/group/add', 'GroupController@add')->name('group.add');
 Route::post('/group/{id}/update', 'GroupController@update')->name('group.update');
 Route::post('/group/{id}/delete', 'GroupController@delete')->name('group.delete');
 Route::post('/group/share', 'GroupController@share')->name('group.share');
+Route::post('/group/manage', 'GroupController@manage')->name('group.manage');
 
 Route::post('/user/search', 'UserController@search')->name('user.search');
 Route::get('/profile', 'UserController@profile')->name('profile');
